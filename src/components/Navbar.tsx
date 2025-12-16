@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Menu, X, ChevronDown, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import AuthModal from "@/components/AuthModal";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
       <div className="container mx-auto px-4">
@@ -61,7 +62,10 @@ const Navbar = () => {
             <Button variant="outline" className="rounded-full px-6">
               Corporate
             </Button>
-            <Button className="rounded-full px-6 gradient-coral text-primary-foreground hover:opacity-90">
+            <Button 
+              className="rounded-full px-6 gradient-coral text-primary-foreground hover:opacity-90"
+              onClick={() => setIsAuthModalOpen(true)}
+            >
               Sign In
             </Button>
           </div>
@@ -88,13 +92,19 @@ const Navbar = () => {
                 <Button variant="outline" className="flex-1 rounded-full">
                   Corporate
                 </Button>
-                <Button className="flex-1 rounded-full gradient-coral text-primary-foreground">
+                <Button 
+                  className="flex-1 rounded-full gradient-coral text-primary-foreground"
+                  onClick={() => setIsAuthModalOpen(true)}
+                >
                   Sign In
                 </Button>
               </div>
             </div>
           </div>
         )}
+
+        {/* Auth Modal */}
+        <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
       </div>
     </nav>
   );
